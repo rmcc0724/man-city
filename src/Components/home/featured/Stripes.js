@@ -3,7 +3,6 @@ import { easePolyOut } from 'd3-ease';
 import Animate from 'react-move/Animate';
 
 class Stripes extends Component {
-
     state = {
         stripes:[
             {
@@ -31,11 +30,10 @@ class Stripes extends Component {
     }
 
     showStripes = () => (
-        this.state.stripes.map((stripe,i)=>(
+        this.state.stripes.map((stripe, i)=>(
             <Animate
                 key={i}
                 show={true}
-
                 start={{
                     background:'#ffffff',
                     opacity:0,
@@ -45,11 +43,11 @@ class Stripes extends Component {
                 }}
 
                 enter={{
-                    background: [stripe.background],
+                    background: `${stripe.background}`,
                     opacity:[1],
-                    left:[stripe.left],
-                    rotate:[stripe.rotate],
-                    top:[stripe.top],
+                    left:`${stripe.left}`,
+                    rotate:`${stripe.rotate}`,
+                    top:`${stripe.top}`,
                     timing: {delay:stripe.delay, duration: 200, ease: easePolyOut },
                     events:{
                         end(){
@@ -59,13 +57,13 @@ class Stripes extends Component {
                 }}
 
             >
-                {({ opacity,left,rotate,top,background})=>{
+                {({ opacity, left, rotate, top, background})=>{
                     return(
                         <div
                             className="stripe"
                             style={{
-                                background: [background],
-                                opacity: [opacity],
+                                background,
+                                opacity,
                                 transform: `rotate(${rotate}deg) translate(${left}px,${top}px)`
                             }}
                         ></div>

@@ -7,6 +7,7 @@ const Featured = () => {
         <div className="featured_wrapper">
             <Stripes/>
             <Text/>
+
         </div>
     );
 };
