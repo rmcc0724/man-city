@@ -24,7 +24,7 @@ class Text extends Component {
                    <div className="featured_number"
                         style={{
                             opacity,
-                            transform: `translate(260px,140px) rotateY(${rotate}deg)`
+                            transform: `translate(260px,160px) rotateY(${rotate}deg)`
                         }}
                    >
                     3
