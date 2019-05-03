@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 export const Tag = (props) => {
     const template = <div
-    stlye={{
+    style={{
         background: props.bck,
         fontSize:props.size,
         color: props.color,
@@ -11,7 +11,7 @@ export const Tag = (props) => {
         display: 'inline-block',
         fontFamily: 'Righteous'
     }}
-    >tag</div>
+    >{props.children}</div>
 
     if(props.link) {
         return (
