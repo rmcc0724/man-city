@@ -23,7 +23,7 @@ const MatchesHome = () => {
         See More Matches
         </Tag>
     </div>
-    </div>
+     </div>
     );
 };
 
