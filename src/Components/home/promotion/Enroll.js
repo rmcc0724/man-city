@@ -30,12 +30,22 @@ class Enroll extends Component {
 
     }
 
+    /*This method runs as the user updates the input field in the form*/
     updateForm(element){
+
+        /*Stores the email object info*/
         const newFormdata = {...this.state.formdata}
-        const newElement = { ...newFormdata[element.id]}
+        console.log(newFormdata);
 
+        ///Get the id of the element which is {'email'} line 126 and store that data as an object'
+        const newElement = { ...newFormdata[element.id]} 
+        console.log(newElement);
+
+        //Get the value of the input
         newElement.value = element.event.target.value;
+        console.log(newElement.value);
 
+        //Run the input through the validation method
         let validData = validate(newElement)
         newElement.valid = validData[0];
         newElement.validationMessage = validData[1]
@@ -108,17 +118,25 @@ class Enroll extends Component {
         return (
             <Fade>
                 <div className="enroll_wrapper">
+                
+                {/*This code executes when the form is submitted */}
                     <form onSubmit={ (event)=> this.submitForm(event)}>
                         <div className="enroll_title">
                             Enter your email
                         </div>
                         <div className="enroll_input">
                             <FormField
+
+                         /*ID of the form*/
                                 id={'email'}
+
+                         /*formdata variable gets the data in state.formdata.email*/
                                 formdata={this.state.formdata.email}
+                          
+                         /*On change update the form with the current input*/
                                 change={(element)=> this.updateForm(element)}
                             />
-
+                         {/*If theres and error display the something wrong element, if not don't display anything*/}
                             { this.state.formError ? 
                                 <div className="error_label">Something is wrong, try again.</div>
                                 :null
