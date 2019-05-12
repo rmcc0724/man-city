@@ -1,7 +1,8 @@
 import React from 'react';
 
 const FormField = ({formdata,id,change}) => {
-
+    
+//This function is called when an error is thrown
     const showError = () => {
         let errorMessage = <div className="error_label">
                 {
@@ -17,7 +18,8 @@ const FormField = ({formdata,id,change}) => {
 
     const renderTemplate = () => {
         let formTemplate = null;
-
+        
+//Check to see if formdata.element has 'input', if true render the input button
         switch(formdata.element){
             case('input'):
                 formTemplate = (
