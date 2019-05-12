@@ -33,34 +33,34 @@ class Enroll extends Component {
     /*This method runs as the user updates the input field in the form*/
     updateForm(element){
 
-        /*Stores and updates newFormdata as the user types, the object is changed */
+      /*Stores and updates newFormdata as the user types, the object is changed */
         const newFormdata = {...this.state.formdata}
         console.log(newFormdata);
 
-        ///Get the id of the element which is {'email'} line 126 and store that data as an object, now were only dealing with the email props
+      ///Get the id of the element which is {'email'} line 126 and store that data as an object, now were only dealing with the email props
         const newElement = { ...newFormdata[element.id]} 
         console.log(newElement);
 
-        //Get the value of the input and store that into our copy of the email object
+      //Get the value of the input and store that into our copy of the email object
         newElement.value = element.event.target.value;
         console.log(newElement.value);
 
-        //Run the input through the validation method and chek if there's an error
+      //Run the input through the validation method and chek if there's an error
         let validData = validate(newElement)
         newElement.valid = validData[0];
         newElement.validationMessage = validData[1]
         
-        //Update the var prop below to the updated newElement object as the user types
+      //Update the var prop below to the updated newElement object as the user types
         newFormdata[element.id] = newElement;
         
-       //Change the state of the 2 props below to the updated data
+     //Change the state of the 2 props below to the updated data
         this.setState({
             formError: false,
             formdata: newFormdata
         })
     }
     
-    //This method resets the state and props of the form data
+  //This method resets the state and props of the form data
     resetFormSuccess(type){
         const newFormdata = {...this.state.formdata}
 
@@ -89,17 +89,28 @@ class Enroll extends Component {
 
 
     submitForm(event){
+     //Prevent the default behavior from happening when the submit button is pressed.
         event.preventDefault();
-        
+     
+     //Create an empty object
+     //Create a boolean variable
         let dataToSubmit = {};
         let formIsValid = true;
-
+     
+     //Go through all the keys in the form data
         for(let key in this.state.formdata){
+         
+         //Copy the current state of all the form data to the empty object
             dataToSubmit[key] = this.state.formdata[key].value;
+         
+         //Check to see if the data in the key of the current form state is valid
             formIsValid = this.state.formdata[key].valid && formIsValid;
         }
 
+     //If the form is valid
         if(formIsValid){
+         
+         
             firebasePromotions.orderByChild('email').equalTo(dataToSubmit.email).once("value")
             .then((snapshot)=>{
                 if(snapshot.val() === null){
