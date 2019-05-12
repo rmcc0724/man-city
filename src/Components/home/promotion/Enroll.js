@@ -33,7 +33,7 @@ class Enroll extends Component {
     /*This method runs as the user updates the input field in the form*/
     updateForm(element){
 
-      /*Stores and updates newFormdata as the user types, the object is changed */
+      /*Create a new object that copies the current state of the formdata*/
         const newFormdata = {...this.state.formdata}
         console.log(newFormdata);
 
@@ -45,7 +45,7 @@ class Enroll extends Component {
         newElement.value = element.event.target.value;
         console.log(newElement.value);
 
-      //Run the input through the validation method and chek if there's an error
+      //Run the input through the validation method and check if there's an error
         let validData = validate(newElement)
         newElement.valid = validData[0];
         newElement.validationMessage = validData[1]
@@ -110,17 +110,24 @@ class Enroll extends Component {
      //If the form is valid
         if(formIsValid){
          
-         
+         //Check to see if the email in the form is already in the database
             firebasePromotions.orderByChild('email').equalTo(dataToSubmit.email).once("value")
             .then((snapshot)=>{
                 if(snapshot.val() === null){
+                 
+                 //If the email is not in the database add it to the database
                     firebasePromotions.push(dataToSubmit);
+                 
+                 //Reset form gets true passed as an arg, check the restFormSuccess function
                     this.resetFormSuccess(true);
                 }else{
+                 
+                 //If it's already in the database
+                 //Reset form gets false passed as an arg, check the restFormSuccess function
                     this.resetFormSuccess(false);
                 }
             })
-            //this.resetFormSuccess()
+         //If the form is not valid set the state of fromError to true
         } else {
             this.setState({
                 formError: true
