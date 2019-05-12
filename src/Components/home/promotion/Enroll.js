@@ -30,7 +30,7 @@ class Enroll extends Component {
 
     }
 
-    /*This method runs as the user updates the input field in the form*/
+    /*This method runs as the user updates the email address in the enrollment form*/
     updateForm(element){
 
       /*Create a new object that copies the current state of the formdata*/
@@ -41,7 +41,7 @@ class Enroll extends Component {
         const newElement = { ...newFormdata[element.id]} 
         console.log(newElement);
 
-      //Get the value of the input and store that into our copy of the email object
+      //Update the value (email) of the newElement object as the user types
         newElement.value = element.event.target.value;
         console.log(newElement.value);
 
@@ -50,10 +50,10 @@ class Enroll extends Component {
         newElement.valid = validData[0];
         newElement.validationMessage = validData[1]
         
-      //Update the var prop below to the updated newElement object as the user types
+      //Update the property of newFormData[email] object as the user types
         newFormdata[element.id] = newElement;
         
-     //Change the state of the 2 props below to the updated data
+     //set the state of the 2 props below to the updated newFormdata
         this.setState({
             formError: false,
             formdata: newFormdata
