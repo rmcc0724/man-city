@@ -33,31 +33,34 @@ class Enroll extends Component {
     /*This method runs as the user updates the input field in the form*/
     updateForm(element){
 
-        /*Stores the email object info*/
+        /*Stores and updates newFormdata as the user types, the object is changed */
         const newFormdata = {...this.state.formdata}
         console.log(newFormdata);
 
-        ///Get the id of the element which is {'email'} line 126 and store that data as an object'
+        ///Get the id of the element which is {'email'} line 126 and store that data as an object, now were only dealing with the email props
         const newElement = { ...newFormdata[element.id]} 
         console.log(newElement);
 
-        //Get the value of the input
+        //Get the value of the input and store that into our copy of the email object
         newElement.value = element.event.target.value;
         console.log(newElement.value);
 
-        //Run the input through the validation method
+        //Run the input through the validation method and chek if there's an error
         let validData = validate(newElement)
         newElement.valid = validData[0];
         newElement.validationMessage = validData[1]
-
+        
+        //Update the var prop below to the updated newElement object as the user types
         newFormdata[element.id] = newElement;
-
+        
+       //Change the state of the 2 props below to the updated data
         this.setState({
             formError: false,
             formdata: newFormdata
         })
     }
-
+    
+    //This method resets the state and props of the form data
     resetFormSuccess(type){
         const newFormdata = {...this.state.formdata}
 
@@ -75,6 +78,7 @@ class Enroll extends Component {
         this.successMessage();
     }
 
+    //This displays success message once the form is submitted
     successMessage(){
         setTimeout(()=>{
             this.setState({
